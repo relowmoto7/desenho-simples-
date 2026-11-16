@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#7657e8">
+<title>Desenho Simples</title>
+<style>
+:root{--purple:#7657e8;--ink:#28243b;--muted:#77738b;--bg:#f6f4fc;--line:#e9e5f4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}button{font:inherit;cursor:pointer;border:0}header{background:linear-gradient(120deg,#7657e8,#a17af5);color:white;padding:18px 20px 22px;box-shadow:0 4px 18px #4b2c9b22}header .top{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:22px;margin:0}header p{margin:5px 0 0;color:#eee7ff;font-size:13px}.logo{font-size:27px;background:#ffffff25;border-radius:13px;padding:8px}.tabs{display:flex;gap:8px;max-width:1100px;margin:16px auto 0;padding:0 14px}.tab{flex:1;padding:12px 8px;border-radius:13px;background:#fff;color:var(--muted);font-weight:700;box-shadow:0 2px 8px #30205c0a}.tab.active{background:var(--ink);color:white}.wrap{max-width:1100px;margin:18px auto;padding:0 14px 35px}.panel{display:none}.panel.active{display:block}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:white;border:1px solid var(--line);border-radius:16px;padding:11px;margin-bottom:12px}.tool{background:#f3f0fb;color:#514b68;padding:10px 12px;border-radius:11px;font-size:13px;font-weight:700}.tool.active{background:var(--purple);color:white}.tool:active,.tab:active,.template:active{transform:scale(.98)}.colorbox{display:flex;align-items:center;gap:8px;margin-left:auto;font-size:13px;font-weight:700}.colorbox input{width:38px;height:38px;border:0;background:none;padding:0}.sizebox{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}.sizebox input{width:85px}.canvasShell{background:white;border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 5px 22px #34265b0a}.canvasArea{width:100%;height:auto;min-height:0;aspect-ratio:10/7;display:flex;align-items:center;justify-content:center;background:#fff;border:1px dashed #ded8ed;border-radius:12px;overflow:hidden;touch-action:none}canvas{width:100%;height:100%;display:block;touch-action:none;object-fit:contain}.under{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}.hint{font-size:12px;color:var(--muted)}.primary{background:var(--purple);color:white;border-radius:11px;padding:11px 16px;font-weight:800}.secondary{background:#eeeafa;color:#554a79;border-radius:11px;padding:11px 14px;font-weight:700}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 14px}.sectionTitle h2{font-size:19px;margin:0}.sectionTitle p{margin:4px 0 0;color:var(--muted);font-size:13px}.chips{display:flex;gap:8px;overflow:auto;padding:2px 0 12px}.chip{white-space:nowrap;background:white;border:1px solid var(--line);padding:9px 13px;border-radius:30px;color:#625b78;font-weight:700}.chip.active{background:#eee9ff;color:#6042cb;border-color:#d8ceff}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px}.template{background:white;border:1px solid var(--line);border-radius:15px;padding:10px;text-align:left;color:var(--ink);box-shadow:0 3px 12px #30205c08}.preview{height:125px;background:#faf9fd;border-radius:10px;display:grid;place-items:center;margin-bottom:8px}.preview svg{width:100%;height:100%;padding:10px}.template strong{font-size:14px}.template small{display:block;color:var(--muted);margin-top:3px}.empty{background:white;border:1px dashed #d8d1e9;border-radius:15px;padding:35px 15px;text-align:center;color:var(--muted);grid-column:1/-1}.saved{position:relative}.saved img{width:100%;height:130px;object-fit:contain;background:white;border-radius:10px}.saved button{margin-top:8px;width:100%}.saved .del{position:absolute;right:15px;top:5px;width:auto;background:#fff;color:#b33;padding:6px 9px;border-radius:9px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#28243b;color:white;padding:11px 17px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:5}.toast.show{opacity:1}.hidden{display:none!important}@media(max-width:560px){header{padding:15px}.tabs{margin-top:12px}.tab{font-size:12px;padding:11px 4px}.wrap{margin-top:13px}.toolbar{gap:6px}.tool{padding:9px 10px}.colorbox{margin-left:0}.canvasArea{height:auto;min-height:0}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.preview{height:115px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><h1>Desenho Simples</h1><p>Solte a imaginação e crie sua própria arte!</p></div><div class="logo">🎨</div></div></header>
+<nav class="tabs"><button class="tab active" data-tab="draw">✏️ Desenhar</button><button class="tab" data-tab="images">🖼️ Imagens</button><button class="tab" data-tab="saved">⭐ Minhas artes</button></nav>
+<main class="wrap">
+<section id="draw" class="panel active">
+<div class="toolbar">
+<button class="tool active" data-tool="pen">✏️ Lápis</button><button class="tool" data-tool="eraser">🧽 Borracha</button><button class="tool" data-tool="fill">🪣 Pintar área</button><button class="tool" data-tool="line">／ Linha</button><button class="tool" data-tool="rect">▭ Retângulo</button><button class="tool" data-tool="circle">◯ Círculo</button>
+<label class="colorbox">Cor <input id="color" type="color" value="#7657e8"></label>
+<label class="sizebox">Tamanho <input id="size" type="range" min="1" max="32" value="5"></label>
+</div>
+<div class="canvasShell"><div class="canvasArea"><canvas id="art" width="1000" height="700"></canvas></div>
+<div class="under"><div><button class="secondary" id="undo">↶ Desfazer</button> <button class="secondary" id="removeTemplate">🖼️ Tirar linhas cinzas</button> <button class="secondary" id="clear">Limpar</button></div><div><button class="primary" id="save">Salvar arte ↓</button></div></div></div>
+<p class="hint">Dica: escolha uma cor e toque em uma parte fechada do molde com “Pintar área”. Use dois dedos para ampliar a página pelo navegador, se necessário.</p>
+</section>
+<section id="images" class="panel">
+<div class="sectionTitle"><div><h2>Escolha um molde</h2><p>Toque em uma imagem para começar a colorir.</p></div></div>
+<div class="chips" id="categories"><button class="chip active" data-cat="Todos">Todos</button><button class="chip" data-cat="Animais">🐾 Animais</button><button class="chip" data-cat="Natureza">🌼 Natureza</button><button class="chip" data-cat="Objetos">🚀 Objetos</button><button class="chip" data-cat="Fantasia">✨ Fantasia</button><button class="chip" data-cat="Comidas">🍓 Comidas</button></div>
+<div class="gallery" id="templates"></div>
+</section>
+<section id="saved" class="panel">
+<div class="sectionTitle"><div><h2>Minhas artes</h2><p>Seus desenhos salvos neste aparelho.</p></div></div>
+<div class="gallery" id="savedGallery"></div>
+</section>
+</main><div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s), canvas=$('#art'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+let tool='pen',drawing=false,start=null,last=null,history=[],currentCategory='Todos';
+const templates=[
+{name:'Gatinho',cat:'Animais',svg:'<path d="M28 42 L20 8 L45 27 Q50 24 55 24 Q60 24 65 27 L80 8 L72 42 Q82 54 78 70 Q72 91 50 91 Q28 91 22 70 Q18 54 28 42Z"/><path d="M34 57 Q39 53 44 57 M56 57 Q61 53 66 57 M45 70 Q50 75 55 70 M50 65 L47 68 L53 68Z"/><path d="M23 64 L5 60 M23 70 L5 73 M77 64 L95 60 M77 70 L95 73"/>'},
+{name:'Cachorrinho',cat:'Animais',svg:'<path d="M28 35 Q12 15 9 35 Q6 57 28 60 Q23 85 50 91 Q77 85 72 60 Q94 57 91 35 Q88 15 72 35 Q60 25 50 27 Q38 25 28 35Z"/><path d="M36 56 Q40 52 44 56 M56 56 Q60 52 64 56 M46 68 Q50 73 54 68 Q50 80 46 68Z"/>'},
+{name:'Borboleta',cat:'Animais',svg:'<path d="M49 47 Q25 4 8 20 Q-2 39 35 55 Q-2 72 10 89 Q29 99 49 62 Q69 99 90 89 Q102 72 65 55 Q102 39 92 20 Q75 4 51 47Z"/><path d="M50 40 Q43 54 50 70 Q57 54 50 40Z M49 40 Q40 24 34 19 M51 40 Q60 24 66 19"/>'},
+{name:'Peixinho',cat:'Animais',svg:'<path d="M18 50 Q40 17 74 42 L92 24 L92 76 L74 58 Q40 83 18 50Z"/><circle cx="36" cy="44" r="3"/><path d="M52 38 Q60 50 52 62"/>'},
+{name:'Flor',cat:'Natureza',svg:'<path d="M50 43 C20 42 23 12 42 23 Q50 28 50 43 C51 10 81 13 67 40 Q63 46 55 49 C85 30 99 58 70 64 Q62 65 55 59 C76 83 52 99 45 70 Q43 63 48 56 C24 82 4 60 31 48 Q39 44 47 49Z"/><circle cx="50" cy="51" r="10"/><path d="M50 62 L50 94 M50 79 Q30 65 27 82 Q39 91 50 84 M50 85 Q67 67 76 81 Q67 95 50 90"/>'},
+{name:'Sol',cat:'Natureza',svg:'<circle cx="50" cy="50" r="22"/><path d="M50 5 V19 M50 81 V95 M5 50 H19 M81 50 H95 M18 18 L28 28 M72 72 L82 82 M82 18 L72 28 M28 72 L18 82"/>'},
+{name:'Foguete',cat:'Objetos',svg:'<path d="M50 7 Q77 24 68 63 L50 82 L32 63 Q23 24 50 7Z"/><circle cx="50" cy="42" r="9"/><path d="M32 55 L14 72 L34 72 M68 55 L86 72 L66 72 M42 76 L38 94 L50 86 L62 94 L58 76"/>'},
+{name:'Coração',cat:'Objetos',svg:'<path d="M50 88 L14 51 Q-1 28 20 16 Q38 7 50 29 Q62 7 80 16 Q101 28 86 51Z"/>'},
+{name:'Coelho',cat:'Animais',svg:'<path d="M34 43 Q12 4 25 5 Q40 7 43 39 M57 39 Q60 7 75 5 Q88 4 66 43 Q83 57 76 77 Q68 94 50 94 Q32 94 24 77 Q17 57 34 43Z"/><circle cx="39" cy="60" r="2"/><circle cx="61" cy="60" r="2"/><path d="M46 72 Q50 76 54 72"/>'},
+{name:'Tartaruga',cat:'Animais',svg:'<path d="M23 39 Q50 15 77 39 L85 65 Q50 88 15 65Z"/><circle cx="50" cy="53" r="18"/><path d="M15 45 L5 37 L8 57 L18 60 M82 45 L95 37 L92 57 L82 60 M28 72 L22 88 L38 83 M72 72 L78 88 L62 83 M50 35 L50 71 M32 53 L68 53"/>'},
+{name:'Elefante',cat:'Animais',svg:'<path d="M25 40 Q15 18 7 31 Q2 52 24 62 Q22 88 50 90 Q78 88 76 62 Q98 52 93 31 Q85 18 75 40 Q65 29 50 29 Q35 29 25 40Z"/><circle cx="38" cy="52" r="2"/><circle cx="62" cy="52" r="2"/><path d="M50 60 Q43 72 52 77 Q62 80 62 68"/>'},
+{name:'Pássaro',cat:'Animais',svg:'<path d="M12 57 Q27 22 63 35 Q78 40 83 55 L97 48 L88 67 Q65 91 35 76Z"/><circle cx="65" cy="48" r="3"/><path d="M35 55 Q52 38 67 65 Q48 72 35 55Z M47 78 L42 92 M58 78 L61 92"/>'},
+{name:'Dinossauro',cat:'Animais',svg:'<path d="M17 73 L17 54 L30 54 L30 43 L43 43 L43 32 L58 32 L58 22 L72 22 L72 40 L86 40 L86 55 L75 55 L75 77 L64 77 L64 65 L48 65 L48 83 L36 83 L36 72Z"/><circle cx="70" cy="34" r="2"/>'},
+{name:'Árvore',cat:'Natureza',svg:'<path d="M50 8 Q72 8 70 34 Q91 36 80 57 Q73 66 61 61 L61 91 L39 91 L39 61 Q15 69 12 49 Q11 31 31 31 Q28 10 50 8Z"/><path d="M39 76 L61 76"/>'},
+{name:'Arco-íris',cat:'Natureza',svg:'<path d="M10 80 A40 40 0 0 1 90 80 M20 80 A30 30 0 0 1 80 80 M30 80 A20 20 0 0 1 70 80 M40 80 A10 10 0 0 1 60 80 M10 80 H90"/>'},
+{name:'Casa',cat:'Objetos',svg:'<path d="M8 48 L50 12 L92 48 M18 43 V90 H82 V43 M40 90 V62 H60 V90 M28 53 H39 V65 H28Z M62 53 H73 V65 H62Z"/>'},
+{name:'Carro',cat:'Objetos',svg:'<path d="M13 63 L20 43 Q23 35 34 35 H67 Q77 35 81 47 L89 63 V77 H11 V63Z"/><path d="M25 45 H75 L82 62 H18Z"/><circle cx="28" cy="77" r="8"/><circle cx="72" cy="77" r="8"/>'},
+{name:'Unicórnio',cat:'Fantasia',svg:'<path d="M25 42 Q20 20 43 24 L55 8 L61 29 Q83 30 78 57 Q73 84 50 87 Q27 84 22 62Z"/><path d="M44 24 L55 8 L61 29 M37 52 Q42 48 46 52 M58 52 Q63 48 67 52 M45 68 Q51 74 57 68"/>'},
+{name:'Dragão',cat:'Fantasia',svg:'<path d="M22 60 Q10 35 34 30 L29 14 L48 28 Q66 18 77 38 L91 31 L83 53 Q88 76 62 82 L50 94 L43 78 Q22 79 22 60Z"/><path d="M34 39 L10 22 L20 50 M66 35 L82 16 L78 45 M45 52 L50 56 L55 52"/>'},
+{name:'Sorvete',cat:'Comidas',svg:'<path d="M25 48 Q17 25 38 22 Q50 3 65 23 Q87 24 75 49 Q65 60 50 58 Q35 60 25 48Z"/><path d="M29 55 L50 94 L71 55"/>'},
+{name:'Morango',cat:'Comidas',svg:'<path d="M50 30 Q20 15 15 43 Q12 69 50 92 Q88 69 85 43 Q80 15 50 30Z"/><path d="M50 30 Q37 10 25 18 Q38 34 50 30 Q62 10 75 18 Q62 34 50 30Z"/><path d="M35 48 L35 50 M53 45 L53 47 M68 57 L68 59 M43 70 L43 72 M58 77 L58 79"/>'}
+,
+{name:'Leão',cat:'Animais',svg:'<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="27"/><path d="M37 45 Q42 40 46 45 M54 45 Q58 40 63 45 M44 59 Q50 65 56 59 M50 52 L47 56 L53 56Z"/>'},
+{name:'Coruja',cat:'Animais',svg:'<path d="M20 35 L15 10 L39 25 Q50 20 61 25 L85 10 L80 35 Q92 62 75 82 Q50 100 25 82 Q8 62 20 35Z"/><circle cx="38" cy="48" r="10"/><circle cx="62" cy="48" r="10"/><path d="M46 62 L50 70 L54 62 M35 82 L30 92 M65 82 L70 92"/>'},
+{name:'Baleia',cat:'Animais',svg:'<path d="M10 55 Q22 25 62 35 Q78 38 85 55 L96 43 L94 67 L82 62 Q68 84 42 82 Q17 80 10 55Z"/><circle cx="68" cy="49" r="3"/><path d="M48 35 Q42 24 50 18 M55 35 Q58 23 66 22"/>'},
+{name:'Abelha',cat:'Animais',svg:'<ellipse cx="50" cy="55" rx="30" ry="22"/><path d="M38 35 L38 75 M52 33 L52 77 M66 38 L66 72 M35 35 Q20 8 10 27 Q12 45 35 45 M65 35 Q80 8 90 27 Q88 45 65 45"/><circle cx="75" cy="51" r="2"/>'},
+{name:'Cogumelo',cat:'Natureza',svg:'<path d="M12 48 Q15 12 50 10 Q85 12 88 48Z"/><path d="M38 48 L34 88 Q50 96 66 88 L62 48Z"/><circle cx="32" cy="34" r="4"/><circle cx="55" cy="24" r="5"/><circle cx="72" cy="38" r="4"/>'},
+{name:'Nuvem',cat:'Natureza',svg:'<path d="M22 72 Q7 70 9 53 Q11 39 27 39 Q30 15 52 18 Q72 18 75 40 Q93 39 92 58 Q91 74 75 74Z"/>'},
+{name:'Lua e estrelas',cat:'Natureza',svg:'<path d="M65 12 Q38 24 43 51 Q49 79 78 76 Q59 98 34 83 Q8 66 20 39 Q33 12 65 12Z"/><path d="M77 15 L81 27 L94 28 L84 36 L87 49 L77 42 L66 49 L70 36 L60 28 L73 27Z M25 72 L28 80 L36 81 L30 86 L32 94 L25 89 L18 94 L20 86 L14 81 L22 80Z"/>'},
+{name:'Barquinho',cat:'Objetos',svg:'<path d="M12 65 H88 L72 87 H30Z M50 15 V64 M50 18 L20 55 H50Z M54 25 L82 55 H54Z"/>'},
+{name:'Avião',cat:'Objetos',svg:'<path d="M48 8 Q55 8 57 25 L62 48 L91 62 L91 72 L61 64 L58 86 L70 94 L70 98 L50 91 L30 98 L30 94 L42 86 L39 64 L9 72 L9 62 L38 48 L43 25 Q45 8 48 8Z"/>'},
+{name:'Pizza',cat:'Comidas',svg:'<path d="M15 25 Q50 5 85 25 L50 92Z"/><path d="M15 25 Q50 42 85 25"/><circle cx="43" cy="43" r="5"/><circle cx="62" cy="37" r="5"/><circle cx="50" cy="65" r="5"/>'},
+{name:'Cupcake',cat:'Comidas',svg:'<path d="M25 50 Q14 35 28 29 Q31 8 50 22 Q67 7 73 29 Q90 39 75 50Z"/><path d="M25 52 L34 91 H66 L75 52Z"/><path d="M37 64 L40 82 M50 62 L50 84 M63 64 L60 82"/>'},
+{name:'Coroa',cat:'Fantasia',svg:'<path d="M12 35 L31 52 L50 15 L69 52 L88 35 L80 82 H20Z"/><circle cx="12" cy="30" r="5"/><circle cx="50" cy="10" r="5"/><circle cx="88" cy="30" r="5"/><path d="M20 90 H80"/>'}
+];
+function svgFor(t){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="white" stroke="#92929a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'+t.svg+'</g></svg>'}
+function showToast(s){let el=$('#toast');el.textContent=s;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1900)}
+function snapshot(){history.push(ctx.getImageData(0,0,canvas.width,canvas.height));if(history.length>20)history.shift()}
+function clearCanvas(){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height)}
+function removeGrayTemplate(){
+  snapshot();
+  const img=ctx.getImageData(0,0,canvas.width,canvas.height),d=img.data;
+  for(let i=0;i<d.length;i+=4){
+    const r=d[i],g=d[i+1],b=d[i+2];
+    if(r>=90&&r<=190&&Math.abs(r-g)<=18&&Math.abs(g-b)<=18){
+      d[i]=255;d[i+1]=255;d[i+2]=255;d[i+3]=255;
+    }
+  }
+  ctx.putImageData(img,0,0);
+  showToast('Linhas cinzas removidas! Seu desenho ficou.');
+}
+$('#removeTemplate').onclick=removeGrayTemplate;
+clearCanvas();snapshot();
+function loadTemplate(t){snapshot();clearCanvas();let img=new Image(),url=URL.createObjectURL(new Blob([svgFor(t)],{type:'image/svg+xml'}));img.onload=()=>{const side=620;ctx.drawImage(img,(canvas.width-side)/2,(canvas.height-side)/2,side,side);URL.revokeObjectURL(url);showToast(t.name+' pronto para colorir!');switchTab('draw')};img.src=url}
+function switchTab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(id==='saved')renderSaved()}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+function renderTemplates(){let list=templates.filter(t=>currentCategory==='Todos'||t.cat===currentCategory);$('#templates').innerHTML=list.map((t,i)=>'<button class="template" data-name="'+t.name+'"><div class="preview">'+svgFor(t)+'</div><strong>'+t.name+'</strong><small>'+t.cat+' · Molde para pintar</small></button>').join('');document.querySelectorAll('.template').forEach(b=>b.onclick=()=>loadTemplate(templates.find(t=>t.name===b.dataset.name)))}
+document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{currentCategory=b.dataset.cat;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x===b));renderTemplates()});renderTemplates();
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x===b))});
+function pos(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+function stroke(a,b){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+function eraseGrayAlong(a,b,radius){
+  const pad=Math.ceil(radius+2),left=Math.max(0,Math.floor(Math.min(a.x,b.x)-pad)),top=Math.max(0,Math.floor(Math.min(a.y,b.y)-pad));
+  const right=Math.min(canvas.width,Math.ceil(Math.max(a.x,b.x)+pad)),bottom=Math.min(canvas.height,Math.ceil(Math.max(a.y,b.y)+pad));
+  const w=right-left,h=bottom-top;if(w<=0||h<=0)return;
+  const img=ctx.getImageData(left,top,w,h),d=img.data;
+  const dx=b.x-a.x,dy=b.y-a.y,len2=dx*dx+dy*dy;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const px=left+x+0.5,py=top+y+0.5;
+    const t=len2?Math.max(0,Math.min(1,((px-a.x)*dx+(py-a.y)*dy)/len2)):0;
+    const dist=Math.hypot(px-(a.x+t*dx),py-(a.y+t*dy));
+    if(dist>radius)continue;
+    const i=(y*w+x)*4,rr=d[i],gg=d[i+1],bb=d[i+2];
+    if(rr>=75&&rr<=210&&Math.abs(rr-gg)<=22&&Math.abs(gg-bb)<=22){
+      d[i]=255;d[i+1]=255;d[i+2]=255;d[i+3]=255;
+    }
+  }
+  ctx.putImageData(img,left,top);
+}
+canvas.addEventListener('pointerdown',e=>{e.preventDefault();canvas.setPointerCapture(e.pointerId);let p=pos(e);if(tool==='fill'){snapshot();floodFill(Math.floor(p.x),Math.floor(p.y),hexToRgba($('#color').value));return}snapshot();drawing=true;start=p;last=p;ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=Number($('#size').value);ctx.strokeStyle=tool==='eraser'?'#ffffff':$('#color').value;if(tool==='pen'||tool==='eraser'){if(tool==='pen')eraseGrayAlong(p,p,Math.max(ctx.lineWidth/2,24));ctx.beginPath();ctx.arc(p.x,p.y,ctx.lineWidth/2,0,Math.PI*2);ctx.fillStyle=ctx.strokeStyle;ctx.fill()}});
+canvas.addEventListener('pointermove',e=>{if(!drawing)return;let p=pos(e);if(tool==='pen'||tool==='eraser'){ctx.lineWidth=Number($('#size').value);ctx.strokeStyle=tool==='eraser'?'#ffffff':$('#color').value;if(tool==='pen')eraseGrayAlong(last,p,Math.max(ctx.lineWidth/2,24));stroke(last,p);last=p}else{ctx.putImageData(history[history.length-1],0,0);ctx.lineWidth=Number($('#size').value);ctx.strokeStyle=$('#color').value;ctx.beginPath();if(tool==='line'){ctx.moveTo(start.x,start.y);ctx.lineTo(p.x,p.y)}else if(tool==='rect'){ctx.rect(start.x,start.y,p.x-start.x,p.y-start.y)}else if(tool==='circle'){let rx=(p.x-start.x)/2,ry=(p.y-start.y)/2;ctx.ellipse(start.x+rx,start.y+ry,Math.abs(rx),Math.abs(ry),0,0,Math.PI*2)}ctx.stroke()}});
+function stop(){if(drawing){drawing=false;last=null}}canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+function hexToRgba(hex){return [parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16),255]}
+function floodFill(x,y,color){let w=canvas.width,h=canvas.height,img=ctx.getImageData(0,0,w,h),d=img.data,idx=(y*w+x)*4,target=[d[idx],d[idx+1],d[idx+2],d[idx+3]];if(Math.abs(target[0]-color[0])+Math.abs(target[1]-color[1])+Math.abs(target[2]-color[2])<20)return;const tol=65,match=i=>Math.abs(d[i]-target[0])+Math.abs(d[i+1]-target[1])+Math.abs(d[i+2]-target[2])<tol&&Math.abs(d[i+3]-target[3])<40===false;let stack=[[x,y]],seen=new Uint8Array(w*h),count=0;while(stack.length&&count<800000){let [px,py]=stack.pop();if(px<0||py<0||px>=w||py>=h)continue;let k=py*w+px;if(seen[k])continue;seen[k]=1;let i=k*4;if(Math.abs(d[i]-target[0])+Math.abs(d[i+1]-target[1])+Math.abs(d[i+2]-target[2])>tol||Math.abs(d[i+3]-target[3])>40)continue;d[i]=color[0];d[i+1]=color[1];d[i+2]=color[2];d[i+3]=255;count++;stack.push([px+1,py],[px-1,py],[px,py+1],[px,py-1])}ctx.putImageData(img,0,0);if(count>=800000)showToast('Área muito grande para preencher.');}
+$('#undo').onclick=()=>{if(history.length>1){history.pop();ctx.putImageData(history[history.length-1],0,0)}else showToast('Nada para desfazer.')};
+$('#clear').onclick=()=>{snapshot();clearCanvas();showToast('Página limpa!')};
+function getSaved(){try{return JSON.parse(localStorage.getItem('desenhoSimplesArtes')||'[]')}catch(e){return []}}
+function save(){let arr=getSaved();arr.unshift({id:Date.now(),img:canvas.toDataURL('image/png'),date:new Date().toLocaleDateString('pt-BR')});arr=arr.slice(0,30);try{localStorage.setItem('desenhoSimplesArtes',JSON.stringify(arr));showToast('Arte salva em Minhas artes!')}catch(e){showToast('Não foi possível salvar. Espaço do navegador cheio.')} }
+$('#save').onclick=save;
+function renderSaved(){let arr=getSaved();$('#savedGallery').innerHTML=arr.length?arr.map(a=>'<div class="template saved"><img src="'+a.img+'" alt="Desenho salvo"><strong>Minha arte</strong><small>'+a.date+'</small><button class="secondary" data-open="'+a.id+'">Abrir para editar</button><button class="del" data-del="'+a.id+'" aria-label="Excluir">✕</button></div>').join(''):'<div class="empty">🖍️<br><strong>Você ainda não salvou desenhos.</strong><br>Suas artes aparecerão aqui!</div>';document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{let a=getSaved().find(x=>x.id==b.dataset.open);if(a){let im=new Image();im.onload=()=>{snapshot();clearCanvas();ctx.drawImage(im,0,0);switchTab('draw')};im.src=a.img}});document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{localStorage.setItem('desenhoSimplesArtes',JSON.stringify(getSaved().filter(x=>x.id!=b.dataset.del)));renderSaved()})}
+</script>
+</body></html>
